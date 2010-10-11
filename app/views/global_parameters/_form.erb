@@ -1,0 +1,17 @@
+<%= form_for(@global_param) do |f| %>
+  <%= render "shared/error_messages", :target => @global_param %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

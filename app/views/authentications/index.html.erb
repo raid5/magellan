@@ -1,0 +1,20 @@
+<h1>Authentications</h1>
+
+<ul>
+<% @auths.each do |auth| %>
+  <li>
+    <strong><%= auth.name %></strong>,
+    method: <%= auth.auth_method %>,
+    <% if auth.auth_method == Authentication::METHODS[:basic] %>
+      u: <%= auth.username %>, p: <%= auth.password %>
+    <% else %>
+      token: <%= auth.oauth_token %>
+    <% end %>
+    
+    <%= link_to "Edit", edit_authentication_path(auth) %>
+    <%= link_to "Delete", authentication_path(auth), :method => :delete, :confirm => "Are you sure?" %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to "New Authentication", new_authentication_path %>

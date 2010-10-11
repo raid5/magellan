@@ -1,0 +1,47 @@
+<h1><%= @parameter_set.name %></h1>
+
+<%= link_to "Endpoint", endpoint_path(@parameter_set.endpoint) %>
+|
+<%= link_to "Edit", edit_parameter_set_path(@parameter_set) %>
+|
+<%= link_to "Delete", parameter_set_path(@parameter_set), :method => :delete, :confirm => "Are you sure?" %>
+
+<h2>Parameters</h2>
+
+<ul>
+  <% @parameters.each do |p| %>
+  <li>
+    <%= p.name %> - <%= p.example %> <%= "[required]" if p.required? %>
+    <%= link_to "Edit", edit_parameter_path(p) %>
+    <%= link_to "Delete", parameter_path(p), :method => :delete, :confirm => "Are you sure?" %>
+  </li>
+  <% end %>
+</ul>
+
+<h2>Headers</h2>
+
+<ul>
+  <% @headers.each do |h| %>
+  <li>
+    <%= h.name %> - <%= h.example %> <%= "[required]" if h.required? %>
+    <%= link_to "Edit", edit_parameter_path(h) %>
+    <%= link_to "Delete", parameter_path(h), :method => :delete, :confirm => "Are you sure?" %>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Parameter", new_parameter_set_parameter_path(@parameter_set) %>
+
+<h2>Response Members</h2>
+
+<ul>
+  <% @parameter_set.response_members.each do |rm| %>
+  <li>
+    <%= rm.name %>, <%= rm.description %> [example: <%= rm.example %>]
+    <%= link_to "Edit", edit_response_member_path(rm) %>
+    <%= link_to "Delete", response_member_path(rm), :method => :delete, :confirm => "Are you sure?" %>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to "New Response Member", new_parameter_set_response_member_path(@parameter_set) %>

@@ -1,0 +1,125 @@
+<div id="browser">
+  <% @groups.each do |group| %>
+  <strong><%= group.name %></strong>
+  <ul>
+    <% group.endpoints.each do |endpoint| %>
+    <li><%= link_to endpoint.name, endpoint, :class => @endpoint == endpoint ? "current" : "" %></li>
+    <% end %>
+  </ul>
+  <% end %>
+  
+  <div id="notes">
+    <strong>Notes</strong>
+    <p>
+      <strong>*</strong> denotes required fields
+    </p>
+  </div>
+</div>
+
+<div id="explorer">
+  <div style="float:right;">
+    <%= link_to "Reset", request.env['PATH_INFO'] %>
+    |
+    <%= link_to "Edit", edit_endpoint_path(@endpoint) %>
+    |
+    <%= link_to "Delete", endpoint_path(@endpoint), :method => :delete, :confirm => "Are you sure?" %>
+  </div>
+  <h1><%= @endpoint.name %></h1>
+
+  <p><%= @endpoint.description %></p>
+  
+  <strong id="parameter-set-http-method"><%= @endpoint.parameter_sets.first.http_method %></strong> <%= @endpoint.url %><br />
+  <strong>Authentication:</strong> <%= @endpoint.authentication.blank? ? "none" : "#{@endpoint.authentication.auth_method} via #{@endpoint.authentication.name}" %>
+  
+  <%= form_tag endpoints_explore_path, :method => :post, :id => "explore-form" do %>    
+    <% if @endpoint.authentication && @endpoint.authentication.auth_method == Authentication::METHODS[:basic] %>
+      <%= hidden_field_tag 'auth', 'basic' %>
+      <%= hidden_field_tag 'username', @endpoint.authentication.username %>
+      <%= hidden_field_tag 'password', @endpoint.authentication.password %>
+    <% elsif @endpoint.authentication && @endpoint.authentication.auth_method == Authentication::METHODS[:oauth] %>
+      <%= hidden_field_tag 'auth', 'oauth' %>
+      <%= hidden_field_tag 'token', @endpoint.authentication.oauth_token %>
+    <% end %>
+    
+    <%= hidden_field_tag 'url', @endpoint.url %>
+    
+    <div id="global-parameters">      
+      <% @global_params.each do |gp| %>
+        <div>
+          <%= hidden_field_tag 'param-keys[]', gp.name, :class => "form-alpha" %>
+          <%= hidden_field_tag 'param-vals[]', gp.value, :class => "form-beta" %>
+        </div>
+      <% end %>
+    </div>
+    
+    <% unless @endpoint.parameter_sets.empty? %>
+    <div id="parameter-set-selection">
+      <p>
+        <%= label_tag :parameter_set %>
+        <%= select_tag 'parameter_set', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
+        <span id="parameter-set-view"><%= link_to "View", parameter_set_path(@endpoint.parameter_sets.first) %></span>
+        |
+        <%= link_to "New", new_endpoint_parameter_set_path(@endpoint) %>
+        |
+        <%= link_to "?", nil, :id => "parameters-expand-all",  %>
+      </p>
+    </div>
+    
+    <div id="parameter-set">
+      <%= render :partial => "parameter_set", :collection => [@endpoint.parameter_sets.first], :as => :ps %>
+    </div>
+    <% end %>
+    
+    <p><%= link_to "Response Explanation", nil, :id => "response-members-link" %></p>
+    <div id="explorer-response-explanation" style="display: none;">
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Example</th>
+          <th>Description</th>
+        </tr>
+      <% @endpoint.parameter_sets.first.response_members.each do |rm| %>
+        <tr>
+          <td><%= rm.name %></td>
+          <td><%= rm.example %></td>
+          <td><%= rm.description %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+    
+    <div id="explorer-submitter">
+      <%= submit_tag "Submit", :name => nil, :id => "explore-submit-btn" %>
+      <%= link_to "Clear", nil, :id => "clear-btn" %>
+      <br />
+      <div id="explorer-loading" style="visibility: hidden;"><%= image_tag 'loading.gif' %></div>
+    </div>
+  <% end %>
+  
+  <div id="parameter-sets">
+    <%= render :partial => "parameter_set", :collection => @endpoint.parameter_sets, :as => :ps %>
+  </div>
+  
+  <div id="parameter-temp">
+    <div class="p-temp">
+      <%= text_field_tag 'param-keys[]', "name", :class => "form-alpha" %>
+      <%= text_field_tag 'param-vals[]', "value", :class => "form-beta" %>
+      <%= link_to "Delete" %>
+    </div>
+  </div>
+  
+  <div id="header-temp">
+    <div class="p-temp">
+      <%= text_field_tag 'header-keys[]', "name", :class => "form-alpha" %>
+      <%= text_field_tag 'header-vals[]', "value", :class => "form-beta" %>
+      <%= link_to "Delete" %>
+    </div>
+  </div>
+  
+  <div id="explorer-error">
+  </div>
+  <div id="explorer-request">
+  </div>
+  <div id="explorer-response">
+  </div>
+</div>

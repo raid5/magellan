@@ -1,0 +1,29 @@
+<%= form_for([@parameter_set, @parameter]) do |f| %>
+  <%= render "shared/error_messages", :target => @parameter %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>    
+  </div>
+  <div class="field">
+    <%= f.label :example %><br />
+    <%= f.text_field :example %>    
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>    
+  </div>
+  <div class="field">
+    <%= f.label :p_type, "Parameter Type" %><br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:parameter] %> Parameter<br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:header] %> Header
+  </div>
+  <div class="field">
+    <%= f.check_box :required %>
+    <%= f.label :required %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

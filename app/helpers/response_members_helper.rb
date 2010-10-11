@@ -1,0 +1,2 @@
+module ResponseMembersHelper
+end

@@ -1,0 +1,57 @@
+<%= div_for ps do %>
+
+  <%= hidden_field_tag 'method', ps.http_method %>
+   
+   <table>
+   <p>
+     <strong>Parameters</strong>
+     <%= link_to "New Temporary", nil, :id => "temporary-parameter-link" %>
+   </p>
+   <% ps.parameters.params.each do |p| %>
+     <tr>
+       <td>
+        <%= label_tag p.name, p.required? ? "#{p.name}*" : p.name %>
+        <%= hidden_field_tag 'param-keys[]', p.name, :class => "form-alpha" %>
+       </td>
+       <td>
+        <%= text_field_tag 'param-vals[]', p.example, :class => "form-beta" %>
+       </td>
+       <td>
+        <%= link_to "?", nil, :class => "description-toggle" %>
+       </td>
+       <td>
+         <div style="display: none;"><%= p.description.blank? ? "(no description)" : p.description %></div>
+       </td>
+     </tr>
+   <% end %>
+   </table>
+   
+   <div id="parameter-set-temp"></div>
+   
+   <table>
+   <p>
+     <strong>Headers</strong>
+     <%= link_to "New Temporary", nil, :id => "temporary-header-link" %>
+   </p>
+   <% ps.parameters.headers.each do |h| %>
+     <tr>
+       <td>
+        <%= label_tag h.name, h.required? ? "#{h.name}*" : h.name %>
+        <%= hidden_field_tag 'header-keys[]', h.name, :class => "form-alpha" %>
+       </td>
+       <td>
+        <%= text_field_tag 'header-vals[]', h.example, :class => "form-beta" %>
+       </td>
+       <td>
+        <%= link_to "?", nil, :class => "description-toggle" %>
+       </td>
+       <td>
+         <div style="display: none;"><%= h.description.blank? ? "(no description)" : h.description %></div>
+       </td>
+     </tr>
+   <% end %>
+   </table>
+   
+   <div id="header-set-temp"></div>
+   
+<% end %>

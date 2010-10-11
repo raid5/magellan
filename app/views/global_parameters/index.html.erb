@@ -1,0 +1,13 @@
+<h1>Global Parameters</h1>
+
+<ul>
+<% @global_params.each do |gp| %>
+  <li>
+    <%= gp.name%> => <%= gp.value %>
+    <%= link_to "Edit", edit_global_parameter_path(gp) %>
+    <%= link_to "Delete", global_parameter_path(gp), :method => :delete, :confirm => "Are you sure?" %>
+  </li>
+<% end %>
+</ul>
+
+<%= link_to "New Global Parameter", new_global_parameter_path %>

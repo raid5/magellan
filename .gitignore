@@ -1,0 +1,7 @@
+.bundle
+db/.DS_Store
+db/*.sqlite3
+db/seeds.rb
+db/seeddata/*
+log/*.log
+tmp/**/*

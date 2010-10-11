@@ -1,0 +1,114 @@
+a {
+  outline: none;
+}
+
+.clear {
+  clear: both;
+}
+
+pre {
+  white-space: pre-wrap;
+}
+
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+#alert {
+  color: red;
+}
+
+#notice {
+  color: green;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+#explorer {
+  padding: 10px;
+  margin-left: 250px;
+  border: 2px dashed lightgray;
+}
+
+#explorer-response-explanation table {
+  margin-bottom: 20px;
+}
+
+#explorer-response-explanation td {
+  min-width: 160px;
+  padding: 0px 10px;
+}
+
+#explorer-submitter {}
+
+#browser {
+  float: left;
+  width: 200px;
+  padding: 10px;
+  margin: 0px 10px;
+  border: 2px dashed lightgray;
+}
+
+#browser ul {
+  list-style-type: none;
+}
+
+#browser ul li a:hover {
+  background-color: #ccc;
+}
+
+#browser ul li a.current {
+  background-color: #ccc;
+}
+
+#parameter-sets {
+  display: none;
+}
+
+#parameter-temp {
+  display: none;
+}
+
+#header-temp {
+  display: none;
+}
+
+.p-temp {
+  margin-bottom: 5px;
+}
+
+#notes {
+  float: left;
+  width: 200px;
+  padding-top: 10px;
+  border-top: 2px dashed lightgray;
+}

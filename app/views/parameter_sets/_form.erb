@@ -1,0 +1,21 @@
+<%= form_for([@endpoint, @parameter_set]) do |f| %>
+  <%= render "shared/error_messages", :target => @parameter_set %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>    
+  </div>
+  <div class="field">
+    <%= f.label :http_method %><br />
+    <select id="select-method" name="parameter_set[http_method]" class="form-alpha">
+      <option value="GET"<%= @parameter_set.new_record? || @parameter_set.http_method == 'GET' ? " selected='selected'" : "" %>>GET</option>
+      <option value="POST"<%= @parameter_set.http_method == 'POST' ? " selected='selected'" : "" %>>POST</option>
+      <option value="PUT"<%= @parameter_set.http_method == 'PUT' ? " selected='selected'" : "" %>>PUT</option>
+      <option value="DELETE"<%= @parameter_set.http_method == 'DELETE' ? " selected='selected'" : "" %>>DELETE</option>
+    </select>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

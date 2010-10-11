@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  example: MyString
+  parameter_set: 
+
+two:
+  name: MyString
+  description: MyString
+  example: MyString
+  parameter_set: 

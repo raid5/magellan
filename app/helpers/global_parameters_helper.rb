@@ -1,0 +1,2 @@
+module GlobalParametersHelper
+end

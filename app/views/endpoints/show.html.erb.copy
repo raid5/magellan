@@ -1,0 +1,72 @@
+<div id="explorer">
+  <div style="float:right;"><%= link_to "Edit", edit_endpoint_path(@endpoint) %></div>
+  <h1>[<%= @endpoint.group.name %>] <%= @endpoint.name %></h1>
+
+  <p><%= @endpoint.description %></p>
+  
+  <strong><%= @endpoint.http_method %></strong> <%= @endpoint.url %><br />
+  <strong>Authentication:</strong> <%= @endpoint.authentication.blank? ? "none" : "#{@endpoint.authentication.auth_method} via #{@endpoint.authentication.name}" %>
+  
+  <%= form_tag endpoints_explore_path, :method => :post, :id => "explore-form" do %>    
+    <% if @endpoint.authentication && @endpoint.authentication.auth_method == Authentication::METHODS[:basic] %>
+      <%= hidden_field_tag 'auth', 'basic' %>
+      <%= hidden_field_tag 'username', @endpoint.authentication.username %>
+      <%= hidden_field_tag 'password', @endpoint.authentication.password %>
+    <% elsif @endpoint.authentication && @endpoint.authentication.auth_method == Authentication::METHODS[:oauth] %>
+      <%= hidden_field_tag 'auth', 'oauth' %>
+      <%= hidden_field_tag 'token', @endpoint.authentication.oauth_token %>
+    <% end %>
+    
+    <%= hidden_field_tag 'url', @endpoint.url %>
+    <%= hidden_field_tag 'method', 'POST' %>
+    
+    <div id="explorer-parameters">
+      <% @endpoint.parameters.each do |parameter| %>
+        <div>
+          <%= label_tag parameter.name %>
+          <%= hidden_field_tag 'param-keys[]', parameter.name, :class => "form-alpha" %>
+          
+          <%= text_field_tag 'param-vals[]', parameter.example, :class => "form-beta" %>
+          
+          <%= "[required]" if parameter.required? %>
+          <%= link_to "?" %>
+          <div class="parameter-description" style="display: none;">blah blew blaw [<%= parameter.id %>]</div>
+        </div>
+      <% end %>
+      
+      <% @global_params.each do |gp| %>
+        <div>
+          <%= hidden_field_tag 'param-keys[]', gp.name, :class => "form-alpha" %>
+          <%= hidden_field_tag 'param-vals[]', gp.value, :class => "form-beta" %>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="clear"></div>
+
+    <p><%= link_to "New Parameter Set", new_endpoint_parameter_set_path(@endpoint) %></p>
+    
+    <div id="explorer-submitter">
+      <%= submit_tag "Submit", :name => nil, :id => "explore-submit-btn" %><br />
+      <div id="explorer-loading" style="visibility: hidden;"><%= image_tag 'loading.gif' %></div>
+    </div>
+  <% end %>
+  
+  <div id="explorer-error">
+  </div>
+  <div id="explorer-request">
+  </div>
+  <div id="explorer-response">
+  </div>
+</div>
+
+<div id="browser">
+  <% @groups.each do |group| %>
+  <strong><%= group.name %></strong>
+  <ul>
+    <% group.endpoints.each do |endpoint| %>
+    <li><%= link_to endpoint.name, endpoint, :class => @endpoint == endpoint ? "current" : "" %></li>
+    <% end %>
+  </ul>
+  <% end %>
+</div>
