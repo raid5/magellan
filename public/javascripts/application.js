@@ -99,7 +99,6 @@ $(document).ready(function(){
   // endpoints - change auth set
   //$('select[name=auth_set_selector]').children().eq(1).attr("selected", "selected");
   $('select[name=auth_set_selector]').children().each(function(index) {
-    console.log($(this).val() + ' vs ' + $('#authentication_id').val());
     if ($(this).val() == $('#authentication_id').val()) {
       $(this).attr("selected", "selected");
     }
