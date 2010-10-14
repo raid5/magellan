@@ -1,0 +1,12 @@
+<%= div_for auth do %>
+
+  <% if auth && auth.auth_method == Authentication::METHODS[:basic] %>
+    <%= hidden_field_tag 'auth', 'basic' %>
+    <%= hidden_field_tag 'username', auth.username %>
+    <%= hidden_field_tag 'password', auth.password %>
+  <% elsif auth && auth.auth_method == Authentication::METHODS[:oauth] %>
+    <%= hidden_field_tag 'auth', 'oauth' %>
+    <%= hidden_field_tag 'token', auth.oauth_token %>
+  <% end %>
+   
+<% end %>

@@ -1,9 +1,6 @@
 <%= form_for([@group, @endpoint]) do |f| %>
   <%= render "shared/error_messages", :target => @endpoint %>
 
-  <%= f.label :authentication %><br />
-  <%= collection_select(:endpoint, :authentication_id, Authentication.all, :id, :name, {:include_blank => 'none'}) %>
-
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>    
@@ -15,15 +12,6 @@
   <div class="field">
     <%= f.label :url %><br />
     <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :method %><br />
-    <select id="select-method" name="endpoint[http_method]" class="form-alpha">
-      <option value="GET"<%= @endpoint.new_record? || @endpoint.http_method == 'GET' ? " selected='selected'" : "" %>>GET</option>
-      <option value="POST"<%= @endpoint.http_method == 'POST' ? " selected='selected'" : "" %>>POST</option>
-      <option value="PUT"<%= @endpoint.http_method == 'PUT' ? " selected='selected'" : "" %>>PUT</option>
-      <option value="DELETE"<%= @endpoint.http_method == 'DELETE' ? " selected='selected'" : "" %>>DELETE</option>
-    </select>
   </div>
 
   <div class="actions">

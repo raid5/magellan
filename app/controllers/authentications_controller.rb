@@ -29,7 +29,12 @@ class AuthenticationsController < ApplicationController
     @auth = Authentication.find(params[:id])
     
     if @auth.update_attributes(params[:authentication])
-      redirect_to @auth, :notice => "Authentication updated"
+      # Reset previous default if needed
+      if @auth.auth_default?
+        Authentication.update_all "auth_default = 0", "id != #{@auth.id}"
+      end
+      
+      redirect_to authentications_path, :notice => "Authentication updated"
     else
       render :action => :edit
     end

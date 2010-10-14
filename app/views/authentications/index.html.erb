@@ -3,7 +3,8 @@
 <ul>
 <% @auths.each do |auth| %>
   <li>
-    <strong><%= auth.name %></strong>,
+    <strong><%= "[DEFAULT]" if auth.auth_default? %></strong>
+    <%= auth.name %>,
     method: <%= auth.auth_method %>,
     <% if auth.auth_method == Authentication::METHODS[:basic] %>
       u: <%= auth.username %>, p: <%= auth.password %>

@@ -1,6 +1,5 @@
 class Endpoint < ActiveRecord::Base
   belongs_to :group
-  belongs_to :authentication
   has_many :parameter_sets, :dependent => :destroy
   
   validates_presence_of :name, :url #, :http_method
