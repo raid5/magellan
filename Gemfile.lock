@@ -67,6 +67,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)
     yajl-ruby (0.7.7)
+    yaml_db (0.2.0)
 
 PLATFORMS
   ruby
@@ -77,3 +78,4 @@ DEPENDENCIES
   rails (= 3.0.0)
   sqlite3-ruby
   yajl-ruby
+  yaml_db
