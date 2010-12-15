@@ -23,6 +23,7 @@ class ResponseMembersController < ApplicationController
 
   def edit
     @response_member = ResponseMember.find(params[:id])
+    @parameter_set = @response_member.parameter_set
   end
   
   def update

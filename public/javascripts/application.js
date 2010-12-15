@@ -129,6 +129,11 @@ $(document).ready(function(){
     $('#parameter-set').html(
       $('#parameter_set_'+$(this).val()).html()
     );
+    
+    // Update response explanations html
+    $('#explorer-response-explanation').html(
+      $('#response-members-'+$(this).val()).html()
+    );
   });
   
   // clear!

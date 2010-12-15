@@ -90,7 +90,15 @@ div.field, div.actions {
   background-color: #ccc;
 }
 
+.description-toggle {
+  display: none;
+}
+
 #parameter-sets {
+  display: none;
+}
+
+#response-explanations {
   display: none;
 }
 

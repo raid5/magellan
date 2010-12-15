@@ -1,0 +1,16 @@
+<div id="response-members-<%= ps.id %>">
+  <table border="1">
+    <tr>
+      <th>Name</th>
+      <th>Example</th>
+      <th>Description</th>
+    </tr>
+    <% ps.response_members.each do |rm| %>
+      <tr>
+        <td><%= rm.name %></td>
+        <td><%= rm.example %></td>
+        <td><%= rm.description %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

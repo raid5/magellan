@@ -70,7 +70,7 @@
         |
         <%= link_to "New", new_endpoint_parameter_set_path(@endpoint) %>
         |
-        <%= link_to "?", nil, :id => "parameters-expand-all",  %>
+        <%= link_to "Toggle Descriptions", nil, :id => "parameters-expand-all", :title => "toggle explanations",   %>
       </p>
     </div>
     
@@ -113,6 +113,10 @@
   
   <div id="parameter-sets">
     <%= render :partial => "parameter_set", :collection => @endpoint.parameter_sets, :as => :ps %>
+  </div>
+  
+  <div id="response-explanations">
+    <%= render :partial => "response_explanation", :collection => @endpoint.parameter_sets, :as => :ps %>
   </div>
   
   <div id="parameter-temp">
