@@ -28,6 +28,10 @@
 
   <p><%= @endpoint.description %></p>
   
+  <% unless @endpoint.notes.blank? %>
+  <p>Notes: <%= @endpoint.notes %></p>
+  <% end %>
+  
   <strong id="parameter-set-http-method"><%= @endpoint.parameter_sets.first.http_method unless @endpoint.parameter_sets.empty? %></strong> <%= @endpoint.url %><br />
   <strong>Authentication:</strong>
   <%= select_tag 'auth_set_selector', options_from_collection_for_select(@authentications, 'id', 'name', @auth_default.id), {:include_blank => 'None'} %>
