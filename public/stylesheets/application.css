@@ -60,7 +60,6 @@ div.field, div.actions {
 
 #explorer {
   padding: 10px;
-  margin-left: 250px;
   border: 2px dashed lightgray;
 }
 
@@ -74,26 +73,6 @@ div.field, div.actions {
 }
 
 #explorer-submitter {}
-
-#browser {
-  float: left;
-  width: 200px;
-  padding: 10px;
-  margin: 0px 10px;
-  border: 2px dashed lightgray;
-}
-
-#browser ul {
-  list-style-type: none;
-}
-
-#browser ul li a:hover {
-  background-color: #ccc;
-}
-
-#browser ul li a.current {
-  background-color: #ccc;
-}
 
 .description-toggle {
   display: none;
@@ -117,13 +96,6 @@ div.field, div.actions {
 
 .p-temp {
   margin-bottom: 5px;
-}
-
-#notes {
-  float: left;
-  width: 200px;
-  margin-bottom: 10px;
-  border-bottom: 2px dashed lightgray;
 }
 
 .grouping {

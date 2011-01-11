@@ -1,25 +1,13 @@
-<div id="browser">
-  <div id="notes">
-    <strong>Notes</strong>
-    <p>
-      <strong>*</strong> denotes required fields
-    </p>
-  </div>
-  
-  <% @groups.each do |group| %>
-  <strong><%= group.name %></strong>
-  <ul>
-    <% group.endpoints.each do |endpoint| %>
-    <li><%= link_to endpoint.name, endpoint, :class => @endpoint == endpoint ? "current" : "" %></li>
-    <% end %>
-  </ul>
-  <% end %>
-</div>
-
 <div id="explorer">
   <div style="float:right;">
     <%= link_to "Reset", request.env['PATH_INFO'] %>
   </div>
+  
+  <h1>Endpoint Selection</h1>
+  
+  <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id",  %>
+  <%= select_tag 'group_endpoint_selector', option_groups_from_collection_for_select(@groups, :endpoints, :name, :id, :name, nil), {:include_blank => 'None'} %>
+  
   <h1><%= @endpoint.name %></h1>
 
   <p><%= @endpoint.description %></p>

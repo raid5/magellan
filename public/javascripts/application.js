@@ -9,6 +9,20 @@ $.fn.explorerAjaxSubmit = function(callback) {
 
 $(document).ready(function(){
   
+  // set initial endpoint selection
+  $('select[name=group_endpoint_selector]').children("optgroup").children("option").each(function(index) {
+    if ($(this).val() == $('#endpoint_id').val()) {
+      $(this).attr("selected", "selected");
+    }
+  });
+  
+  // endpoint selection changed
+  $('select[name=group_endpoint_selector]').change(function() {
+    if ($(this).val() == "") return;
+    
+    location.href = '/endpoints/' + $(this).val();
+  });
+  
   // authentication method change
   $('select[name=authentication[auth_method]]').change(function() {
     // Reset fields

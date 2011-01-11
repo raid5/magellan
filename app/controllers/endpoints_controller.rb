@@ -6,7 +6,7 @@ class EndpointsController < ApplicationController
     @endpoint = params[:id].blank? ? Endpoint.first : Endpoint.find(params[:id])
     redirect_to(root_path, :alert => 'No endpoints yet.') and return if @endpoint.nil?
     
-    @groups = Group.all
+    @groups = Group.order("name")
     @authentications = Authentication.all
     @auth_default = Authentication.find_by_auth_default(true)
     @global_params = GlobalParameter.all
