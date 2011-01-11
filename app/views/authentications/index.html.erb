@@ -11,6 +11,10 @@
     authentications when exploring the API.
   </p>
 
+  <%= link_to "Back to Setup", setup_path %>
+  |
+  <%= link_to "New Authentication", new_authentication_path %>
+
   <ul>
   <% @auths.each do |auth| %>
     <li>
@@ -28,9 +32,5 @@
     </li>
   <% end %>
   </ul>
-
-  <%= link_to "Back to Setup", root_path %>
-  |
-  <%= link_to "New Authentication", new_authentication_path %>
 
 </div>

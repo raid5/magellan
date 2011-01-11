@@ -3,10 +3,6 @@ class AuthenticationsController < ApplicationController
     @auths = Authentication.all
   end
 
-  def show
-    @auth = Authentication.find(params[:id])
-  end
-
   def new
     @auth = Authentication.new
   end

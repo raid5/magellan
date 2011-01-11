@@ -2,10 +2,6 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.order("name")
   end
-  
-  def show
-    @group = Group.find(params[:id])
-  end
 
   def new
     @group = Group.new

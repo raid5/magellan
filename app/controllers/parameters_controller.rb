@@ -1,8 +1,4 @@
 class ParametersController < ApplicationController
-  def show
-    @parameter = Parameter.find(params[:id])
-  end
-
   def new
     @parameter_set = ParameterSet.find(params[:parameter_set_id])
     @parameter = @parameter_set.parameters.build

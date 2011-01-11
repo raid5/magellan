@@ -1,10 +1,4 @@
 class ResponseMembersController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-
   def new
     @parameter_set = ParameterSet.find(params[:parameter_set_id])
     @response_member = @parameter_set.response_members.build

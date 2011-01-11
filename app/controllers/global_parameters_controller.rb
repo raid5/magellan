@@ -3,10 +3,6 @@ class GlobalParametersController < ApplicationController
     @global_params = GlobalParameter.all
   end
 
-  def show
-    @global_param = GlobalParameter.find(params[:id])
-  end
-
   def new
     @global_param = GlobalParameter.new
   end
