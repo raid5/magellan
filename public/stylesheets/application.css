@@ -53,6 +53,11 @@ div.field, div.actions {
   list-style: square;
 }
 
+.page_container {
+  padding: 10px;
+  width: 600px;
+}
+
 #explorer {
   padding: 10px;
   margin-left: 250px;
@@ -119,4 +124,19 @@ div.field, div.actions {
   width: 200px;
   padding-top: 10px;
   border-top: 2px dashed lightgray;
+}
+
+.grouping {
+  border: 1px gray dashed;
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+}
+
+.grouping-inner {
+  margin: 10px 0px 10px 0px;
+}
+
+.ps-header {
+  display: block;
+  margin: 10px 0px 10px 0px;
 }

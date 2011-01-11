@@ -1,47 +1,68 @@
-<h1><%= @parameter_set.name %></h1>
+<div class="page_container">
 
-<%= link_to "Endpoint", endpoint_path(@parameter_set.endpoint) %>
-|
-<%= link_to "Edit", edit_parameter_set_path(@parameter_set) %>
-|
-<%= link_to "Delete", parameter_set_path(@parameter_set), :method => :delete, :confirm => "Are you sure?" %>
+  <h1><%= @parameter_set.name %></h1>
 
-<h2>Parameters</h2>
+  <%= link_to "Edit", edit_parameter_set_path(@parameter_set) %>
+  |
+  <%= link_to "Delete", parameter_set_path(@parameter_set), :method => :delete, :confirm => "Are you sure?" %>
 
-<ul>
-  <% @parameters.each do |p| %>
-  <li>
-    <%= p.name %> - <%= p.example %> <%= "[required]" if p.required? %>
-    <%= link_to "Edit", edit_parameter_path(p) %>
-    <%= link_to "Delete", parameter_path(p), :method => :delete, :confirm => "Are you sure?" %>
-  </li>
-  <% end %>
-</ul>
+  <h2>Parameters</h2>
+  
+  <p><strong>Explanation of the various ps components: standard/header parameters and response members.</strong></p>
 
-<h2>Headers</h2>
+  <%= link_to "New Parameter", new_parameter_set_parameter_path(@parameter_set) %>
 
-<ul>
-  <% @headers.each do |h| %>
-  <li>
-    <%= h.name %> - <%= h.example %> <%= "[required]" if h.required? %>
-    <%= link_to "Edit", edit_parameter_path(h) %>
-    <%= link_to "Delete", parameter_path(h), :method => :delete, :confirm => "Are you sure?" %>
-  </li>
-  <% end %>
-</ul>
+  <h3>Standard Parameters</h3>
 
-<%= link_to "New Parameter", new_parameter_set_parameter_path(@parameter_set) %>
+  <ul>
+    <% @parameters.each do |p| %>
+    <li>
+      <%= p.name %> - <%= p.example %> <%= "[required]" if p.required? %>
+      <%= link_to "Edit", edit_parameter_path(p) %>
+      <%= link_to "Delete", parameter_path(p), :method => :delete, :confirm => "Are you sure?" %>
+    </li>
+    <% end %>
+  </ul>
 
-<h2>Response Members</h2>
+  <h3>Header Parameters</h3>
 
-<ul>
-  <% @parameter_set.response_members.each do |rm| %>
-  <li>
-    <%= rm.name %>, <%= rm.description %> [example: <%= rm.example %>]
-    <%= link_to "Edit", edit_response_member_path(rm) %>
-    <%= link_to "Delete", response_member_path(rm), :method => :delete, :confirm => "Are you sure?" %>
-  </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @headers.each do |h| %>
+    <li>
+      <%= h.name %> - <%= h.example %> <%= "[required]" if h.required? %>
+      <%= link_to "Edit", edit_parameter_path(h) %>
+      <%= link_to "Delete", parameter_path(h), :method => :delete, :confirm => "Are you sure?" %>
+    </li>
+    <% end %>
+  </ul>
 
-<%= link_to "New Response Member", new_parameter_set_response_member_path(@parameter_set) %>
+  <h2>Response Members</h2>
+
+  <ul>
+    <% @parameter_set.response_members.each do |rm| %>
+    <li>
+      <%= rm.name %>, <%= rm.description %> [example: <%= rm.example %>]
+      <%= link_to "Edit", edit_response_member_path(rm) %>
+      <%= link_to "Delete", response_member_path(rm), :method => :delete, :confirm => "Are you sure?" %>
+    </li>
+    <% end %>
+  </ul>
+
+  <%= link_to "New Response Member", new_parameter_set_response_member_path(@parameter_set) %>
+
+  <br /><br />
+  <p>
+    After you have completed setting up any standard parameters, header parameters,
+    and response memebers, you can:
+    <ul>
+      <li><%= link_to "Return to the #{@parameter_set.endpoint.name} endpoint", endpoint_path(@parameter_set.endpoint) %> to test the parameter set or define additional parameter sets</li>
+      <li><%= link_to "Return to Endpoints", group_path(@parameter_set.endpoint.group) %> to define more for this grouping</li>
+      <li><%= link_to "Return to Groups", groups_path %> to define additional groups</li>
+      <li><%= link_to "Return to Setup Summary", root_path %> if you are done defining endpoints entirely</li>
+    </ul>
+  </p>
+  <p>
+    
+  </p>
+
+</div>

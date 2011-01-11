@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.all
+    @groups = Group.order("name")
   end
   
   def show
@@ -15,7 +15,7 @@ class GroupsController < ApplicationController
     @group = Group.new(params[:group]) 
     
     if @group.save
-      redirect_to @group, :notice => "Group created"
+      redirect_to new_group_endpoint_path(@group), :notice => "Group created"
     else
       render :action => :new
     end

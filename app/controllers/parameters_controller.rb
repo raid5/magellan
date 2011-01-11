@@ -1,7 +1,4 @@
 class ParametersController < ApplicationController
-  def index
-  end
-
   def show
     @parameter = Parameter.find(params[:id])
   end

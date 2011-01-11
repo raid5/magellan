@@ -1,13 +1,50 @@
-<h1>Groups</h1>
+<div class="page_container">
 
-<ul>
-<% @groups.each do |group| %>
-  <li>
-    <%= link_to group.name, group_path(group) %>
-  </li>
-<% end %>
-</ul>
+  <h1>Groups</h1>
 
-<%= link_to "Back to Main Page", root_path %>
-|
-<%= link_to "New Group", new_group_path %>
+  <p><strong>Reiterate the purpose of groups.</strong></p>
+  
+  <%= link_to "Back to Setup", root_path %>
+  |
+  <%= link_to "New Group", new_group_path %>
+
+
+  <% @groups.each do |group| %>
+    <div class="grouping">
+
+      <%= group.name %>
+      <%= link_to "Edit", edit_group_path(group) %>
+      <%= link_to "Delete", group_path(group), :method => :delete, :confirm => "Are you sure you want to delete the group '#{group.name}'?" %>
+      
+      <% unless group.endpoints.empty? %>
+      <ul>
+        <strong>Endpoints</strong>
+        <% group.endpoints.each do |endpoint | %>
+          <li class="grouping-inner">
+            <%= endpoint.name %>
+            <%= link_to "Edit", edit_endpoint_path(endpoint) %>
+            <%= link_to "Delete", endpoint_path(endpoint), :method => :delete, :confirm => "Are you sure you want to delete the endpoint '#{endpoint.name}'?" %>
+            <%= link_to "Test", endpoint_path(endpoint) %>
+          </li>
+
+          <% unless endpoint.parameter_sets.empty? %>
+          <ul>
+            <strong class="ps-header">Parameter Sets</strong>
+            <% endpoint.parameter_sets.each do |pset| %>
+            <li>
+              <%= pset.name %>
+              <%= link_to "Edit", parameter_set_path(pset) %>
+              <%= link_to "Delete", parameter_set_path(pset), :method => :delete, :confirm => "Are you sure you want to delete the parameter set '#{pset.name}'?" %>
+            </li>
+            <% end %>
+          </ul>
+          <% end %>
+        <% end %>
+      </ul>
+      <% end %>
+
+    </div>
+  <% end %>
+
+
+</div>

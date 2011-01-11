@@ -22,7 +22,8 @@ class EndpointsController < ApplicationController
     @endpoint = @group.endpoints.build(params[:endpoint])
     
     if @endpoint.save
-      redirect_to @endpoint, :notice => "Endpoint created"
+      #redirect_to @endpoint, :notice => "Endpoint created"
+      redirect_to new_endpoint_parameter_set_path(@endpoint), :notice => "Endpoint created"
     else
       render :action => :new
     end

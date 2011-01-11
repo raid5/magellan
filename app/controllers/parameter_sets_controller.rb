@@ -1,7 +1,4 @@
 class ParameterSetsController < ApplicationController
-  def index
-  end
-
   def show
     @parameter_set = ParameterSet.find(params[:id])
     @parameters = @parameter_set.parameters.params
@@ -18,7 +15,8 @@ class ParameterSetsController < ApplicationController
     @parameter_set = @endpoint.parameter_sets.build(params[:parameter_set])
     
     if @parameter_set.save
-      redirect_to @parameter_set, :notice => "Parameter set created"
+      #redirect_to @parameter_set, :notice => "Parameter set created"
+      redirect_to new_parameter_set_parameter_path(@parameter_set), :notice => "Parameter set created"
     else
       render :action => :new
     end

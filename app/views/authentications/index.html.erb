@@ -1,23 +1,36 @@
-<h1>Authentications</h1>
+<div class="page_container">
 
-<ul>
-<% @auths.each do |auth| %>
-  <li>
-    <strong><%= "[DEFAULT]" if auth.auth_default? %></strong>
-    <%= auth.name %>,
-    method: <%= auth.auth_method %>,
-    <% if auth.auth_method == Authentication::METHODS[:basic] %>
-      u: <%= auth.username %>, p: <%= auth.password %>
-    <% else %>
-      token: <%= auth.oauth_token %>
-    <% end %>
+  <h2>Authentications</h2>
+
+  <p>
+    As mentioned previously, only HTTP Basic authentication is currently supported,
+    with OAuth coming soon. If you are unfamiliar with HTTP Basic, see
+    <%= link_to "Basic access authentication", 'http://en.wikipedia.org/wiki/Basic_access_authentication' %>.
+    You can add as many authentications as you wish, and set your default authentication
+    scheme to use. In addition, you will be able to toggle between your difference
+    authentications when exploring the API.
+  </p>
+
+  <ul>
+  <% @auths.each do |auth| %>
+    <li>
+      <%= auth.name %>,
+      method: <%= auth.auth_method %>,
+      <% if auth.auth_method == Authentication::METHODS[:basic] %>
+        u: <%= auth.username %>, p: <%= auth.password %>
+      <% else %>
+        token: <%= auth.oauth_token %>
+      <% end %>
     
-    <%= link_to "Edit", edit_authentication_path(auth) %>
-    <%= link_to "Delete", authentication_path(auth), :method => :delete, :confirm => "Are you sure?" %>
-  </li>
-<% end %>
-</ul>
+      <%= link_to "Edit", edit_authentication_path(auth) %>
+      <%= link_to "Delete", authentication_path(auth), :method => :delete, :confirm => "Are you sure you want to delete '#{auth.name}'?" %>
+      <strong><%= "[DEFAULT]" if auth.auth_default? %></strong>
+    </li>
+  <% end %>
+  </ul>
 
-<%= link_to "Back to Main Page", root_path %>
-|
-<%= link_to "New Authentication", new_authentication_path %>
+  <%= link_to "Back to Setup", root_path %>
+  |
+  <%= link_to "New Authentication", new_authentication_path %>
+
+</div>

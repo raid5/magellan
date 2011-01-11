@@ -5,12 +5,21 @@
 
 <h2>Endpoints</h2>
 
-<ul>
-  <% @group.endpoints.each do |endpoint | %>
-  <li><%= link_to endpoint.name, endpoint_path(endpoint) %></li>
-  <% end %>
-</ul>
-
 <%= link_to "Groups", groups_path %>
 |
 <%= link_to "New Endpoint", new_group_endpoint_path(@group) %>
+
+<ul>
+  <% @group.endpoints.each do |endpoint | %>
+    <li><%= endpoint.name %> <%= link_to "Edit", edit_endpoint_path(endpoint) %> <%= link_to "Test", endpoint_path(endpoint) %></li>
+  
+    <% unless endpoint.parameter_sets.empty? %>
+    <ul>
+      <strong>Parameter Sets</strong>
+      <% endpoint.parameter_sets.each do |pset| %>
+      <li><%= link_to pset.name, parameter_set_path(pset) %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  <% end %>
+</ul>

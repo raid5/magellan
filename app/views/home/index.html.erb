@@ -1,11 +1,71 @@
-<h1>Magellan - The API Explorer</h1>
+<div class="page_container">
+  
+  <p>Magellan is a simple, standalone API explorer written in Rails 3.</p>
 
-<h3>STEP 1: Setup <%= link_to "Authentication", authentications_path %> methods.</h3>
+  <p>
+    <strong>(1)</strong><br />
+    To get things started, you need to setup the authentication schemes you plan
+    on using to access the API. Only HTTP Basic is currently supported, with
+    OAuth coming very soon. You must define at least one authentication.
+  </p>
 
-<h3>STEP 2: Define any <%= link_to "Global Parameters", global_parameters_path %>.</h3>
+  <p><%= link_to "Authentication Setup", authentications_path %></p>
+  
+  <ul>
+  <% @auths.each do |auth| %>
+    <li>
+      <%= auth.name %>
+      <strong><%= "[DEFAULT]" if auth.auth_default? %></strong>
+    </li>
+  <% end %>
+  </ul>
 
-<h3>STEP 3: Define endpoint <%= link_to "Groups", groups_path %>.</h3>
+  <% unless @auths.empty? %>
+  
+    <p>
+      <strong>(2)</strong><br />
+      Once you have setup your authentications, you can proceed to setting
+      up any global parameters that you plan on including with all API requests. An
+      example of this is an API key provided by the service you are trying to access.
+      Many services require you send your API key along with every request to track
+      your usage and watch for abuse.
+    </p>
 
-<h3>STEP 4: Define endpoints under previously created <%= link_to "Groups", groups_path %>.</h3>
+    <p><%= link_to "Global Parameters Setup", global_parameters_path %></p>
+  
+    <ul>
+    <% @global_params.each do |gp| %>
+      <li>
+        <%= gp.name%> = <%= gp.value %>
+      </li>
+    <% end %>
+    </ul>
+    
+    <p>
+      <strong>(3)</strong><br />
+      After you have setup your authentications and defined any global parameters
+      you would like to use, it is time to move onto creating groups to categorize
+      your endpoints by. This is just an approach to organize endpoints in a
+      reasonable fashion. If you don't really care to group your endpoints, just
+      create a single top-level group and add your endpoints to it.
+    </p>
 
-<h3>STEP 5: Explore <%= link_to "Endpoints", endpoints_path %>!</h3>
+    <p><%= link_to "Groups Setup", groups_path %></p>
+  
+    <ul>
+    <% @groups.each do |group| %>
+      <li>
+        <%= group.name %>
+        
+        <ul>
+          <% group.endpoints.each do |endpoint | %>
+          <li><%= endpoint.name %></li>
+          <% end %>
+        </ul>
+      </li>
+    <% end %>
+    </ul>
+  
+  <%end %>
+
+</div>
