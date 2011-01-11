@@ -14,5 +14,7 @@ Magellan::Application.routes.draw do
   match 'endpoints' => 'endpoints#show'
   match 'endpoints/explore'
   
-  root :to => "home#index"
+  match 'setup' => 'home#index', :as => :setup
+  
+  root :to => "endpoints#show"
 end

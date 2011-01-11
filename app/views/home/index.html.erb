@@ -3,7 +3,7 @@
   <p>Magellan is a simple, standalone API explorer written in Rails 3.</p>
 
   <p>
-    <strong>(1)</strong><br />
+    <strong>(1) Authentication</strong><br />
     To get things started, you need to setup the authentication schemes you plan
     on using to access the API. Only HTTP Basic is currently supported, with
     OAuth coming very soon. You must define at least one authentication.
@@ -23,7 +23,7 @@
   <% unless @auths.empty? %>
   
     <p>
-      <strong>(2)</strong><br />
+      <strong>(2) Global Parameters</strong><br />
       Once you have setup your authentications, you can proceed to setting
       up any global parameters that you plan on including with all API requests. An
       example of this is an API key provided by the service you are trying to access.
@@ -42,7 +42,7 @@
     </ul>
     
     <p>
-      <strong>(3)</strong><br />
+      <strong>(3) Groups &amp; Endpoints</strong><br />
       After you have setup your authentications and defined any global parameters
       you would like to use, it is time to move onto creating groups to categorize
       your endpoints by. This is just an approach to organize endpoints in a
@@ -67,5 +67,12 @@
     </ul>
   
   <%end %>
+  
+  <p>
+    <strong>(4) Explore!</strong><br />
+    Once everything is setup, you can <%= link_to "explore", root_path %>
+    those lovely API endpoints! You may have already see this explore interface
+    while testing our your endpoints.
+  </p>
 
 </div>

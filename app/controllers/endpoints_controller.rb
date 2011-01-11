@@ -1,12 +1,11 @@
 class EndpointsController < ApplicationController
-  def index
-  end
-
-  def show    
-    @endpoint = params[:id].blank? ? Endpoint.first : Endpoint.find(params[:id])
-    redirect_to(root_path, :alert => 'No endpoints yet.') and return if @endpoint.nil?
-    
+  def show
     @groups = Group.order("name")
+    redirect_to(setup_path, :alert => 'No groups yet.') and return if @groups.first.nil?
+    
+    @endpoint = params[:id].blank? ? @groups.first.endpoints.first : Endpoint.find(params[:id])
+    redirect_to(setup_path, :alert => 'Invalid Endpoint.') and return if @endpoint.nil?
+    
     @authentications = Authentication.all
     @auth_default = Authentication.find_by_auth_default(true)
     @global_params = GlobalParameter.all
