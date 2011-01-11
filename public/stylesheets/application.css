@@ -122,8 +122,8 @@ div.field, div.actions {
 #notes {
   float: left;
   width: 200px;
-  padding-top: 10px;
-  border-top: 2px dashed lightgray;
+  margin-bottom: 10px;
+  border-bottom: 2px dashed lightgray;
 }
 
 .grouping {

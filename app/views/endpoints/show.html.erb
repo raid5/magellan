@@ -1,4 +1,11 @@
 <div id="browser">
+  <div id="notes">
+    <strong>Notes</strong>
+    <p>
+      <strong>*</strong> denotes required fields
+    </p>
+  </div>
+  
   <% @groups.each do |group| %>
   <strong><%= group.name %></strong>
   <ul>
@@ -7,13 +14,6 @@
     <% end %>
   </ul>
   <% end %>
-  
-  <div id="notes">
-    <strong>Notes</strong>
-    <p>
-      <strong>*</strong> denotes required fields
-    </p>
-  </div>
 </div>
 
 <div id="explorer">
