@@ -38,7 +38,7 @@ $(document).ready(function(){
   });
   
   // toggle ALL parameter descriptions
-  $('#parameters-expand-all').click(function(e) {
+  $('#parameters-expand-all').live('click', function(e) {
     e.stopImmediatePropagation();
     $("div#parameter-set a.description-toggle").each(function(index) {
       $(this).click();
@@ -123,7 +123,7 @@ $(document).ready(function(){
     );
     
     // Update select option view link
-    $('#parameter-set-view').html("<a href='/parameter_sets/" + $(this).val() + "'>View</a>");
+    //$('#parameter-set-view').html("<a href='/parameter_sets/" + $(this).val() + "'>View</a>");
     
     // Update parameter set html
     $('#parameter-set').html(

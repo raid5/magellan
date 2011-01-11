@@ -19,10 +19,6 @@
 <div id="explorer">
   <div style="float:right;">
     <%= link_to "Reset", request.env['PATH_INFO'] %>
-    |
-    <%= link_to "Edit", edit_endpoint_path(@endpoint) %>
-    |
-    <%= link_to "Delete", endpoint_path(@endpoint), :method => :delete, :confirm => "Are you sure?" %>
   </div>
   <h1><%= @endpoint.name %></h1>
 
@@ -70,11 +66,6 @@
       <p>
         <strong><%= label_tag 'Parameter Set:' %></strong>
         <%= select_tag 'parameter_set', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
-        <span id="parameter-set-view"><%= link_to "View", parameter_set_path(@endpoint.parameter_sets.first) %></span>
-        |
-        <%= link_to "New", new_endpoint_parameter_set_path(@endpoint) %>
-        |
-        <%= link_to "Toggle Descriptions", nil, :id => "parameters-expand-all", :title => "toggle explanations",   %>
       </p>
     </div>
     

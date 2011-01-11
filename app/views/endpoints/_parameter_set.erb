@@ -6,6 +6,8 @@
    <p>
      <strong>Parameters</strong>
      <%= link_to "New Temporary", nil, :id => "temporary-parameter-link" %>
+     |
+     <%= link_to "Toggle Descriptions", nil, :id => "parameters-expand-all", :title => "toggle explanations" %>
    </p>
    <% ps.parameters.params.each do |p| %>
      <tr>
