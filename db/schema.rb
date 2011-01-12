@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101014181922) do
+ActiveRecord::Schema.define(:version => 20110112021108) do
 
   create_table "authentications", :force => true do |t|
     t.string   "auth_method"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20101014181922) do
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "p_type",     :default => 0
   end
 
   create_table "groups", :force => true do |t|

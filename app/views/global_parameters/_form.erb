@@ -10,6 +10,12 @@
     <%= f.label :value %><br />
     <%= f.text_field :value %>
   </div>
+  
+  <div class="field">
+    <%= f.label :p_type, "Parameter Type" %><br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:parameter] %> Standard<br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:header] %> Header
+  </div>
 
   <div class="actions">
     <%= f.submit %>
