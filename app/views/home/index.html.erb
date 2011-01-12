@@ -6,7 +6,12 @@
     <strong>(1) Authentication</strong><br />
     To get things started, you need to setup the authentication schemes you plan
     on using to access the API. Only HTTP Basic is currently supported, with
-    OAuth coming very soon. You must define at least one authentication.
+    OAuth coming very soon. If you are unfamiliar with HTTP Basic, see
+    <%= link_to "Basic access authentication", 'http://en.wikipedia.org/wiki/Basic_access_authentication' %>.
+    You can add as many authentications as you wish, and set your default authentication
+    scheme to use. In addition, you will be able to toggle between your difference
+    authentications when exploring the API. You must define at least one authentication before
+    continuing on.
   </p>
 
   <p><%= link_to "Authentication Setup", authentications_path %></p>
@@ -65,14 +70,16 @@
       </li>
     <% end %>
     </ul>
+    
+    <% unless @groups.empty? and !@has_endpoints %>
+    <p>
+      <strong>(4) Explore!</strong><br />
+      Once everything is setup, you can <%= link_to "explore", root_path %>
+      those lovely API endpoints! You may have already see this explore interface
+      while testing our your endpoints.
+    </p>
+    <% end %>
   
-  <%end %>
-  
-  <p>
-    <strong>(4) Explore!</strong><br />
-    Once everything is setup, you can <%= link_to "explore", root_path %>
-    those lovely API endpoints! You may have already see this explore interface
-    while testing our your endpoints.
-  </p>
+  <% end %>
 
 </div>
