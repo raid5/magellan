@@ -1,11 +1,9 @@
 <div class="page_container">
   
   <h1><%= @group.name %> - New Endpoint</h1>
-  
-  <p><strong>Reiterate what an endpoint is.</strong></p>
 
   <%= render 'form' %>
 
-  <%= link_to "Cancel", group_path(@group) %>
+  <%= link_to "Cancel", groups_path %>
 
 </div>

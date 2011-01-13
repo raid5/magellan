@@ -36,10 +36,16 @@
     <%= hidden_field_tag 'url', @endpoint.url %>
     
     <div id="global-parameters">      
-      <% @global_params.each do |gp| %>
+      <% @global_standard_params.each do |gp| %>
         <div>
           <%= hidden_field_tag 'param-keys[]', gp.name, :class => "form-alpha" %>
           <%= hidden_field_tag 'param-vals[]', gp.value, :class => "form-beta" %>
+        </div>
+      <% end %>
+      <% @global_header_params.each do |ghp| %>
+        <div>
+          <%= hidden_field_tag 'header-keys[]', ghp.name %>
+          <%= hidden_field_tag 'header-vals[]', ghp.value %>
         </div>
       <% end %>
     </div>

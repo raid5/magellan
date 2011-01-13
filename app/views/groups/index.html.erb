@@ -1,8 +1,6 @@
 <div class="page_container">
 
   <h1>Groups</h1>
-
-  <p><strong>Reiterate the purpose of groups.</strong></p>
   
   <%= link_to "Back to Setup", setup_path %>
   |
@@ -16,9 +14,8 @@
       <%= link_to "Edit", edit_group_path(group) %>
       <%= link_to "Delete", group_path(group), :method => :delete, :confirm => "Are you sure you want to delete the group '#{group.name}'?" %>
       
-      <% unless group.endpoints.empty? %>
       <ul>
-        <strong>Endpoints</strong>
+        <strong>Endpoints</strong> <%= link_to "New", new_group_endpoint_path(group) %>
         <% group.endpoints.each do |endpoint | %>
           <li class="grouping-inner">
             <%= endpoint.name %>
@@ -27,9 +24,8 @@
             <%= link_to "Test", endpoint_path(endpoint) %>
           </li>
 
-          <% unless endpoint.parameter_sets.empty? %>
           <ul>
-            <strong class="ps-header">Parameter Sets</strong>
+            <strong>Parameter Sets</strong> <%= link_to "New", new_endpoint_parameter_set_path(endpoint) %>
             <% endpoint.parameter_sets.each do |pset| %>
             <li>
               <%= pset.name %>
@@ -38,10 +34,8 @@
             </li>
             <% end %>
           </ul>
-          <% end %>
         <% end %>
       </ul>
-      <% end %>
 
     </div>
   <% end %>

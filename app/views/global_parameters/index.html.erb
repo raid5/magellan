@@ -9,7 +9,7 @@
   <ul>
   <% @global_params.each do |gp| %>
     <li>
-      <%= gp.name%> => <%= gp.value %>
+      <%= gp.name%> = <%= gp.value %>
       <%= link_to "Edit", edit_global_parameter_path(gp) %>
       <%= link_to "Delete", global_parameter_path(gp), :method => :delete, :confirm => "Are you sure?" %>
     </li>

@@ -8,7 +8,7 @@
 
   <div class="field">
     <%= f.label :auth_method %><br />
-    <%= f.select("auth_method", Authentication::METHODS, { :disabled => ['oauth'] }) %>
+    <%= f.select("auth_method", Authentication::METHODS) %>
   </div>
   
   <div id="authentication-method-select">

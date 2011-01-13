@@ -8,10 +8,15 @@
 
   <h2>Parameters</h2>
   
-  <p><strong>Explanation of the various ps components: standard/header parameters and response members.</strong></p>
+  <p>
+    Standard parameters are normal name/value pairs used in the query string or
+    post data sent with the request. In contrast, header parameters are name/value 
+    pairs added to the request headers.
+  </p>
 
   <%= link_to "New Parameter", new_parameter_set_parameter_path(@parameter_set) %>
 
+  <% unless @parameters.empty? %>
   <h3>Standard Parameters</h3>
 
   <ul>
@@ -19,11 +24,14 @@
     <li>
       <%= p.name %> - <%= p.example %> <%= "[required]" if p.required? %>
       <%= link_to "Edit", edit_parameter_path(p) %>
+      |
       <%= link_to "Delete", parameter_path(p), :method => :delete, :confirm => "Are you sure?" %>
     </li>
     <% end %>
   </ul>
+  <% end %>
 
+  <% unless @headers.empty? %>
   <h3>Header Parameters</h3>
 
   <ul>
@@ -35,30 +43,51 @@
     </li>
     <% end %>
   </ul>
+  <% end %>
+  
+  <% unless @url_parameters.empty? %>
+  <h3>URL Parameters</h3>
+
+  <ul>
+    <% @url_parameters.each do |up| %>
+    <li>
+      <%= up.name %> - <%= up.example %> <%= "[required]" if up.required? %>
+      <%= link_to "Edit", edit_parameter_path(up) %>
+      <%= link_to "Delete", parameter_path(up), :method => :delete, :confirm => "Are you sure?" %>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
 
   <h2>Response Members</h2>
+  
+  <%= link_to "New Response Member", new_parameter_set_response_member_path(@parameter_set) %>
+  
+  <p>
+    Response members are a way to supply descriptions for the different elements
+    returned in the request response.
+  </p>
 
   <ul>
     <% @parameter_set.response_members.each do |rm| %>
     <li>
       <%= rm.name %>, <%= rm.description %> [example: <%= rm.example %>]
       <%= link_to "Edit", edit_response_member_path(rm) %>
+      |
       <%= link_to "Delete", response_member_path(rm), :method => :delete, :confirm => "Are you sure?" %>
     </li>
     <% end %>
   </ul>
 
-  <%= link_to "New Response Member", new_parameter_set_response_member_path(@parameter_set) %>
+  <h2>Done?</h2>
 
-  <br /><br />
   <p>
     After you have completed setting up any standard parameters, header parameters,
-    and response memebers, you can:
+    and response members, you can:
     <ul>
-      <li><%= link_to "Return to the #{@parameter_set.endpoint.name} endpoint", endpoint_path(@parameter_set.endpoint) %> to test the parameter set or define additional parameter sets</li>
-      <li><%= link_to "Return to Endpoints", group_path(@parameter_set.endpoint.group) %> to define more for this grouping</li>
-      <li><%= link_to "Return to Groups", groups_path %> to define additional groups</li>
-      <li><%= link_to "Return to Setup", setup_path %> if you are done defining endpoints entirely</li>
+      <li><%= link_to "Test", endpoint_path(@parameter_set.endpoint) %> the parameter set</li>
+      <li><%= link_to "Create", new_endpoint_parameter_set_path(@parameter_set.endpoint) %> an additional parameter set</li>
+      <li><%= link_to "Return to Groups & Endpoints", groups_path %> listing to define additional groups or overview current setup</li>
     </ul>
   </p>
   <p>

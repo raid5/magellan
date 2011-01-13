@@ -3,6 +3,7 @@ class ParameterSetsController < ApplicationController
     @parameter_set = ParameterSet.find(params[:id])
     @parameters = @parameter_set.parameters.params
     @headers = @parameter_set.parameters.headers
+    @url_parameters = @parameter_set.parameters.url_params
   end
 
   def new

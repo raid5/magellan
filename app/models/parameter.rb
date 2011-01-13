@@ -3,7 +3,8 @@ class Parameter < ActiveRecord::Base
   
   TYPES = {
     :parameter => 0,
-    :header => 1
+    :header => 1,
+    :url => 2
   }
   
   validates_presence_of :name, :p_type #:example
@@ -11,4 +12,5 @@ class Parameter < ActiveRecord::Base
   
   scope :params, where(:p_type => TYPES[:parameter])
   scope :headers, where(:p_type => TYPES[:header])
+  scope :url_params, where(:p_type => TYPES[:url])
 end

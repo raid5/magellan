@@ -4,7 +4,7 @@
    
    <table>
    <p>
-     <strong>Parameters</strong>
+     <strong>Standard Parameters</strong>
      <%= link_to "New Temporary", nil, :id => "temporary-parameter-link" %>
      |
      <%= link_to "Toggle Descriptions", nil, :id => "parameters-expand-all", :title => "toggle explanations" %>
@@ -55,5 +55,28 @@
    </table>
    
    <div id="header-set-temp"></div>
+   
+   <table>
+   <p>
+     <strong>URL Parameters</strong>
+   </p>
+   <% ps.parameters.url_params.each do |up| %>
+     <tr>
+       <td>
+        <%= label_tag up.name, up.required? ? "#{up.name}*" : up.name %>
+        <%= hidden_field_tag 'url-param-keys[]', up.name, :class => "form-alpha" %>
+       </td>
+       <td>
+        <%= text_field_tag 'url-param-vals[]', up.example, :class => "form-beta" %>
+       </td>
+       <td>
+        <%= link_to "", nil, :class => "description-toggle" %>
+       </td>
+       <td>
+         <div style="display: none;"><%= up.description.blank? ? "(no description)" : up.description %></div>
+       </td>
+     </tr>
+   <% end %>
+   </table>
    
 <% end %>

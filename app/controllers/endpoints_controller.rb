@@ -8,7 +8,8 @@ class EndpointsController < ApplicationController
     
     @authentications = Authentication.all
     @auth_default = Authentication.find_by_auth_default(true)
-    @global_params = GlobalParameter.all
+    @global_standard_params = GlobalParameter.where(:p_type => Parameter::TYPES[:parameter])
+    @global_header_params = GlobalParameter.where(:p_type => Parameter::TYPES[:header])
   end
 
   def new
@@ -36,7 +37,8 @@ class EndpointsController < ApplicationController
     @endpoint = Endpoint.find(params[:id])
     
     if @endpoint.update_attributes(params[:endpoint])
-      redirect_to @endpoint, :notice => "Endpoint updated"
+      #redirect_to @endpoint, :notice => "Endpoint updated"
+      redirect_to groups_path, :notice => "Endpoint updated"
     else
       render :action => :edit
     end
@@ -55,6 +57,9 @@ class EndpointsController < ApplicationController
     #render :json => json(:error => "Calm down and try my margarita!")
     
     url, method, auth = params.values_at(:url, :method, :auth)
+    
+    # arbitrary url params
+    add_url_params_from_arrays(url, params["url-param-keys"], params["url-param-vals"])
     
     curl = curl_client(url, method, params)
     
@@ -118,6 +123,19 @@ class EndpointsController < ApplicationController
       curl.headers['Authorization'] = "Basic #{encoded}"
     end
   end
+  
+  # url parameters from non-empty keys and values
+  def add_url_params_from_arrays(url, keys, values)
+    keys, values = Array(keys), Array(values)
+
+    keys.each_with_index do |key, i|
+      next if values[i].to_s.empty?
+      
+      # magic goes here
+      url_param = ":#{key.to_s}"
+      url.gsub!(/#{url_param}/, values[i].to_s)
+    end
+  end
 
   # headers from non-empty keys and values
   def add_headers_from_arrays(curl, keys, values)
@@ -130,14 +148,14 @@ class EndpointsController < ApplicationController
   end
   
   # headers from non-empty keys and values
-  def add_headers_from_arrays(curl, keys, values)
-    keys, values = Array(keys), Array(values)
-
-    keys.each_with_index do |key, i|
-      next if values[i].to_s.empty?
-      curl.headers[key] = values[i]
-    end
-  end
+  # def add_headers_from_arrays(curl, keys, values)
+  #   keys, values = Array(keys), Array(values)
+  # 
+  #   keys.each_with_index do |key, i|
+  #     next if values[i].to_s.empty?
+  #     curl.headers[key] = values[i]
+  #   end
+  # end
 
   # post params from non-empty keys and values
   def make_fields(method, keys, values)
