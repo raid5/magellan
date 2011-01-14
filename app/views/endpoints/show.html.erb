@@ -29,7 +29,6 @@
       <%= hidden_field_tag 'password', @auth_default.password %>
     <% elsif @auth_default && @auth_default.auth_method == Authentication::METHODS[:oauth] %>
       <%= hidden_field_tag 'auth', 'oauth' %>
-      <%= hidden_field_tag 'token', @auth_default.oauth_token %>
     <% end %>
     </div>
     

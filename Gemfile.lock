@@ -66,6 +66,7 @@ GEM
     thor (0.14.4)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
+    typhoeus (0.2.0)
     tzinfo (0.3.23)
     yajl-ruby (0.7.7)
     yaml_db (0.2.0)
@@ -79,5 +80,6 @@ DEPENDENCIES
   oauth
   rails (= 3.0.3)
   sqlite3-ruby
+  typhoeus
   yajl-ruby
   yaml_db

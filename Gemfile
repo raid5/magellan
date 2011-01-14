@@ -6,6 +6,8 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'curb'
 gem 'yajl-ruby'
 gem 'albino'
+
 gem 'oauth'
+gem 'typhoeus'
 
 gem 'yaml_db'
