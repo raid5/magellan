@@ -58,6 +58,11 @@ div.field, div.actions {
   width: 600px;
 }
 
+.field-tip {
+  font-size: 10pt;
+  color: gray;
+}
+
 #explorer {
   padding: 10px;
   border: 2px dashed lightgray;

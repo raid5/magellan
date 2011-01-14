@@ -25,7 +25,7 @@
   <% end %>
   </ul>
 
-  <% unless @auths.empty? %>
+  <% unless @auths.empty? || @auth_default.nil? %>
   
     <p>
       <h2>(2) Global Parameters</h2>

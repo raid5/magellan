@@ -16,5 +16,7 @@ Magellan::Application.routes.draw do
   
   match 'setup' => 'home#index', :as => :setup
   
+  match 'oauth/callback' => 'authentications#callback', :as => :oauth_callback
+  
   root :to => "endpoints#show"
 end

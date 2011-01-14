@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112021108) do
+ActiveRecord::Schema.define(:version => 20110114004733) do
 
   create_table "authentications", :force => true do |t|
     t.string   "auth_method"
@@ -20,7 +20,10 @@ ActiveRecord::Schema.define(:version => 20110112021108) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-    t.boolean  "auth_default", :default => false
+    t.boolean  "auth_default",       :default => false
+    t.string   "consumer_key"
+    t.string   "consumer_secret"
+    t.string   "oauth_token_secret"
   end
 
   create_table "endpoints", :force => true do |t|

@@ -2,13 +2,18 @@
   <%= render "shared/error_messages", :target => @auth %>
   
   <div class="field">
+    <%= f.label :auth_method %><br />
+    <%= f.select("auth_method", Authentication::METHODS) %>
+  </div>
+  
+  <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-
+  
   <div class="field">
-    <%= f.label :auth_method %><br />
-    <%= f.select("auth_method", Authentication::METHODS) %>
+    <%= f.check_box :auth_default %>
+    <%= f.label 'Default?' %>
   </div>
   
   <div id="authentication-method-select">
@@ -24,16 +29,37 @@
     </div>
   
     <div id="authentication-oauth" style="<%= @auth.oauth_token.blank? ? 'display:none;' : '' %>">
+      <h2>Required OAuth Fields</h2>
       <div class="field">
-        <%= f.label :oauth_token %><br />
-        <%= f.text_field :oauth_token %>
+        <%= f.label :consumer_key %><br />
+        <%= f.text_field :consumer_key %>
+      </div>
+      <div class="field">
+        <%= f.label :consumer_secret %><br />
+        <%= f.text_field :consumer_secret %>
+      </div>
+      <div class="field">
+        <%= label_tag 'base_url', 'Base URL' %><br />
+        <%= text_field_tag 'base_url' %>
+      </div>
+      
+      <h2>Optional OAuth Fields</h2>
+      <div class="field">
+        <%= label_tag 'request_token_path', 'Request Token Path' %><br />
+        <span class="field-tip">Default is /oauth/request_token</span><br />
+        <%= text_field_tag 'request_token_path' %>
+      </div>
+      <div class="field">
+        <%= label_tag 'authorize_path', 'Authorize Path' %><br />
+        <span class="field-tip">Default is /oauth/authorize</span><br />
+        <%= text_field_tag 'authorize_path' %>
+      </div>
+      <div class="field">
+        <%= label_tag 'access_token_path', 'Access Token Path' %><br />
+        <span class="field-tip">Default is /oauth/access_token</span><br />
+        <%= text_field_tag 'access_token_path' %>
       </div>
     </div>
-  </div>
-  
-  <div class="field">
-    <%= f.check_box :auth_default %>
-    <%= f.label 'Default?' %>
   </div>
 
   <div class="actions">
