@@ -8,4 +8,5 @@ class Authentication < ActiveRecord::Base
   validates_inclusion_of :auth_method, :in => METHODS.values
   
   validates_presence_of :name
+  validates_uniqueness_of :name
 end

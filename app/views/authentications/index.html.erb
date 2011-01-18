@@ -16,8 +16,8 @@
       <% else %>
         token: <%= auth.oauth_token %>
       <% end %>
-    
-      <%= link_to "Edit", edit_authentication_path(auth) %>
+      <br />
+      <%= link_to "Edit", edit_authentication_path(auth) unless auth.auth_method == 'oauth' %>
       <%= link_to "Delete", authentication_path(auth), :method => :delete, :confirm => "Are you sure you want to delete '#{auth.name}'?" %>
       <strong><%= "[DEFAULT]" if auth.auth_default? %></strong>
     </li>

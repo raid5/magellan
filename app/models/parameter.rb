@@ -7,7 +7,7 @@ class Parameter < ActiveRecord::Base
     :url => 2
   }
   
-  validates_presence_of :name, :p_type #:example
+  validates_presence_of :name, :p_type
   validates_inclusion_of :p_type, :in => TYPES.values
   
   scope :params, where(:p_type => TYPES[:parameter])

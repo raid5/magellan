@@ -56,7 +56,15 @@ class EndpointsController < ApplicationController
   #  by Chris Wanstrath and Leah Culver.
   
   def explore
-    url, method, auth = params.values_at(:url, :method, :auth)
+    # ActiveRecord objects
+    authentication = Authentication.find(params[:authentication_id])
+    endpoint = Endpoint.find(params[:endpoint_id])
+    parameter_set = ParameterSet.find(params[:parameter_set_id])
+    
+    # Relevant parameters
+    url = endpoint.url
+    method = parameter_set.http_method
+    auth = authentication.auth_method
     
     # arbitrary url params
     add_url_params_from_arrays(url, params["url-param-keys"], params["url-param-vals"])
@@ -95,14 +103,11 @@ class EndpointsController < ApplicationController
       end
       
     elsif auth == 'oauth'
-      # Find authentication
-      auth = Authentication.find(params[:authentication_id])
-      
       # Build OAuth Consumer
-      consumer = OAuth::Consumer.new(auth.consumer_key, auth.consumer_secret)
+      consumer = OAuth::Consumer.new(authentication.consumer_key, authentication.consumer_secret)
       
       # Build AccessToken
-      access_token = OAuth::AccessToken.new(consumer, auth.oauth_token, auth.oauth_token_secret)
+      access_token = OAuth::AccessToken.new(consumer, authentication.oauth_token, authentication.oauth_token_secret)
       
       # Convert param/header arrays into hashes
       params_hash = params_to_hash(params["param-keys"], params["param-vals"])
@@ -139,20 +144,6 @@ class EndpointsController < ApplicationController
       render :json => json(:header    => header,
                            :body      => body,
                            :request   => request)
-      
-      # if method == 'GET'
-      #   
-      # elsif method == 'POST'
-      #   
-      # elsif method == 'PUT'
-      #   
-      # elsif method == 'DELETE'
-      #   
-      # end
-      
-      #uri = URI.parse(url)
-      #base_url = "#{uri.scheme}://#{uri.host}"
-      
     end
   end
   

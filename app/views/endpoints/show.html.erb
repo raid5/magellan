@@ -5,7 +5,6 @@
   
   <h1>Endpoint Selection</h1>
   
-  <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id",  %>
   <%= select_tag 'group_endpoint_selector', option_groups_from_collection_for_select(@groups, :endpoints, :name, :id, :name, nil), {:include_blank => 'None'} %>
   
   <h1><%= @endpoint.name %></h1>
@@ -22,17 +21,7 @@
   
   <%= form_tag endpoints_explore_path, :method => :post, :id => "explore-form" do %>
     <%= hidden_field_tag 'authentication_id', @auth_default.id, :id => "authentication_id",  %>
-    <div id="auth-set">
-    <% if @auth_default && @auth_default.auth_method == Authentication::METHODS[:basic] %>
-      <%= hidden_field_tag 'auth', 'basic' %>
-      <%= hidden_field_tag 'username', @auth_default.username %>
-      <%= hidden_field_tag 'password', @auth_default.password %>
-    <% elsif @auth_default && @auth_default.auth_method == Authentication::METHODS[:oauth] %>
-      <%= hidden_field_tag 'auth', 'oauth' %>
-    <% end %>
-    </div>
-    
-    <%= hidden_field_tag 'url', @endpoint.url %>
+    <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id",  %>
     
     <div id="global-parameters">      
       <% @global_standard_params.each do |gp| %>
@@ -58,7 +47,7 @@
     <div id="parameter-set-selection">
       <p>
         <strong><%= label_tag 'Parameter Set:' %></strong>
-        <%= select_tag 'parameter_set', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
+        <%= select_tag 'parameter_set_id', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
       </p>
     </div>
     
