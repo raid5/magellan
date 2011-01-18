@@ -8,10 +8,13 @@
 </head>
 <body>
   
-  <h1><%= link_to "Magellan - The API Explorer", root_path %></h1>
+  <% link_to root_path do %>
+    <%= image_tag 'logo.png', :border => 0 %>
+  <% end %>
   
-  <p id="alert"><%= alert %></p>
-  <p id="notice"><%= notice %></p>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
 
   <%= yield %>
 

@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.order("name")
+    @groups = Group.includes(:endpoints => [:parameter_sets]).order("name")
   end
 
   def new

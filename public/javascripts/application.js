@@ -17,7 +17,8 @@ $(document).ready(function(){
   });
   
   // endpoint selection changed
-  $('select[name=group_endpoint_selector]').change(function() {
+  $('select[name=group_endpoint_selector]').change(function(e) {
+    e.stopImmediatePropagation();
     if ($(this).val() == "") return;
     
     location.href = '/endpoints/' + $(this).val();

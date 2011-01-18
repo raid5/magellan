@@ -2,7 +2,7 @@ require 'oauth/request_proxy/typhoeus_request'
 
 class EndpointsController < ApplicationController
   def show
-    @groups = Group.order("name")
+    @groups = Group.includes(:endpoints).order("name")
     redirect_to(setup_path, :alert => 'No groups yet.') and return if @groups.first.nil?
     
     @endpoint = params[:id].blank? ? @groups.first.endpoints.first : Endpoint.find(params[:id])
