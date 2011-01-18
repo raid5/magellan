@@ -122,7 +122,7 @@ class EndpointsController < ApplicationController
       req = Typhoeus::Request.new(url, { :method => method.downcase.to_sym,
                                          :headers => headers_hash,
                                          :params => params_hash })
-      oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => url, :unsigned_parameters => params_hash))
+      oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => url))
       
       req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
 
