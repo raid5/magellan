@@ -8,10 +8,6 @@
 </head>
 <body>
   
-  <% link_to root_path do %>
-    <%= image_tag 'logo.png', :border => 0 %>
-  <% end %>
-  
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>
   <% end %>
