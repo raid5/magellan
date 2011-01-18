@@ -60,7 +60,7 @@ class AuthenticationsController < ApplicationController
   def callback
     # Request access token
     request_token = session[:request_token]
-    access_token = request_token.get_access_token
+    access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
     
     # Save access token to authentication
     @auth = Authentication.find(session[:authentication_id])
