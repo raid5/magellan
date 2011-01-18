@@ -20,8 +20,8 @@
   <%= select_tag 'auth_set_selector', options_from_collection_for_select(@authentications, 'id', 'name', @auth_default.id), {:include_blank => 'None'} %>
   
   <%= form_tag endpoints_explore_path, :method => :post, :id => "explore-form" do %>
-    <%= hidden_field_tag 'authentication_id', @auth_default.id, :id => "authentication_id",  %>
-    <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id",  %>
+    <%= hidden_field_tag 'authentication_id', @auth_default.id, :id => "authentication_id" %>
+    <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id" %>
     
     <div id="global-parameters">      
       <% @global_standard_params.each do |gp| %>
