@@ -105,8 +105,12 @@ class EndpointsController < ApplicationController
       access_token = OAuth::AccessToken.new(consumer, auth.oauth_token, auth.oauth_token_secret)
       
       # Convert param/header arrays into hashes
-      params_hash = params_to_hash(params["param-keys"], params["param-values"])
-      headers_hash = headers_to_hash(params["header-keys"], params["header-values"])
+      params_hash = params_to_hash(params["param-keys"], params["param-vals"])
+      headers_hash = headers_to_hash(params["header-keys"], params["header-vals"])
+      
+      # p params_hash.inspect
+      # p '* * *'
+      # p headers_hash.inspect
       
       # Build request
       oauth_params = { :consumer => consumer, :token => access_token }
@@ -123,13 +127,14 @@ class EndpointsController < ApplicationController
       
       response = req.response
       
-      p req.inspect
-      p '* * * * * * * * *'
-      p response.inspect
+      # p req.inspect
+      # p '\n* * * * * * * * *\n'
+      # p response.inspect
       
       header  = pretty_print_headers(response.headers)
       body    = pretty_print(response.headers_hash[:content_type], response.body)
-      request = pretty_print_requests(req.headers, [])
+      request = pretty_print_headers_from_hash(req.headers, req.params)
+      #request = pretty_print_requests(req.headers, [])
 
       render :json => json(:header    => header,
                            :body      => body,
@@ -293,17 +298,19 @@ class EndpointsController < ApplicationController
   end
 
   def pretty_print_json(content)
-    #colorize :js => shell("python -msimplejson.tool", :stdin => content)
+    # (Old. Removed simplejson) colorize :js => shell("python -msimplejson.tool", :stdin => content)
     
     jason = Yajl::Parser.parse(content)
-    colorize :js => Yajl::Encoder.encode(jason, :pretty => true)
+    #colorize :js => Yajl::Encoder.encode(jason, :pretty => true)
+    Yajl::Encoder.encode(jason, :pretty => true)
   end
 
   def pretty_print_xml(content)
     temp = Tempfile.new(['xmlcontent', '.xml'])
     temp.print content
     temp.flush
-    colorize :xml => shell("xmllint --format #{temp.path}")
+    # colorize :xml => shell("xmllint --format #{temp.path}")
+    shell("xmllint --format #{temp.path}")
   ensure
     temp.close!
   end
@@ -318,6 +325,15 @@ class EndpointsController < ApplicationController
     end
 
     "<div class='highlight'><pre>#{lines.join}</pre></div>"
+  end
+  
+  def pretty_print_headers_from_hash(headers, params)
+    lines = ''
+    headers.each do |key, value|
+      lines << "<span class='nt'>#{key}</span>: <span class='s'>#{value}</span><br />"
+    end
+
+    "<div class='highlight'><pre>#{lines}</pre></div>" << "<span style='font-family: courier; font-size: 13px;'>#{params.to_query}</span>"
   end
 
   # accepts an array of request headers and formats them
