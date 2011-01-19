@@ -113,32 +113,47 @@ class EndpointsController < ApplicationController
       params_hash = params_to_hash(params["param-keys"], params["param-vals"])
       headers_hash = headers_to_hash(params["header-keys"], params["header-vals"])
       
-      # p params_hash.inspect
-      # p '* * *'
-      # p headers_hash.inspect
+      # Hack to get around OAuth and Typhoeus not playing nicely with HTTP POST requests
+      #  When the request method is POST, not sure what Typhoeus is doing with :params
+      #  exactly but they don't seem to be handled correctly with regards to OAuth. The
+      #  signature is invalid with POST but not GET requests. To solve this, I am moving
+      #  the POST parameters to the URL query string (which is an option according
+      #  to the OAuth 1.0a spec).
+
+      # Build request w/ Typhoeus      
+      oauth_params = { :consumer => consumer, :token => access_token, :request_uri => url }
       
-      # Build request
-      oauth_params = { :consumer => consumer, :token => access_token }
-      req = Typhoeus::Request.new(url, { :method => method.downcase.to_sym,
-                                         :headers => headers_hash,
-                                         :params => params_hash })
-      oauth_helper = OAuth::Client::Helper.new(req, oauth_params.merge(:request_uri => url))
+      if method == 'POST'
+        # Forcing params onto URL
+        p = to_params(Array(params["param-keys"]), Array(params["param-vals"]))
+        url = "#{url}?#{URI.encode(p)}"
+        
+        req = Typhoeus::Request.new(url, { :method => method.downcase.to_sym,
+                                           :headers => headers_hash })
+      else
+        # GET/PUT/DELETE - Typhoeus will take care of params
+        req = Typhoeus::Request.new(url, { :method => method.downcase.to_sym,
+                                           :headers => headers_hash,
+                                           :params => params_hash })
+      end
+              
+      oauth_helper = OAuth::Client::Helper.new(req, oauth_params)
       
       req.headers.merge!({"Authorization" => oauth_helper.header}) # Signs the request
-
+      
       hydra = Typhoeus::Hydra.new
       hydra.queue(req)
       hydra.run
       
       response = req.response
-      
+
       # p req.inspect
-      # p '\n* * * * * * * * *\n'
+      # p '* * * * * * * * *'
       # p response.inspect
-      
+
       header  = pretty_print_headers(response.headers)
       body    = pretty_print(response.headers_hash[:content_type], response.body)
-      request = pretty_print_headers_from_hash(req.headers, req.params)
+      request = pretty_print_headers_from_hash(req.headers, req.params.nil? ? {} : req.params)
       #request = pretty_print_requests(req.headers, [])
 
       render :json => json(:header    => header,
