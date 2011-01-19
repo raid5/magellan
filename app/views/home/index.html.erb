@@ -43,7 +43,7 @@
     <ul>
     <% @global_params.each do |gp| %>
       <li>
-        <%= gp.name%> = <%= gp.value %>
+        [<%= Parameter::TYPES.key(gp.p_type).to_s %>] <%= gp.name%> = <%= gp.value %>
       </li>
     <% end %>
     </ul>

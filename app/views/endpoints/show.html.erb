@@ -25,37 +25,29 @@
     <%= hidden_field_tag 'authentication_id', @auth_default.id, :id => "authentication_id" %>
     <%= hidden_field_tag 'endpoint_id', @endpoint.id, :id => "endpoint_id" %>
     
-    <div id="global-parameters">      
-      <% @global_standard_params.each do |gp| %>
-        <div>
-          <%= hidden_field_tag 'param-keys[]', gp.name, :class => "form-alpha" %>
-          <%= hidden_field_tag 'param-vals[]', gp.value, :class => "form-beta" %>
-        </div>
-      <% end %>
-      <% @global_header_params.each do |ghp| %>
-        <div>
-          <%= hidden_field_tag 'header-keys[]', ghp.name %>
-          <%= hidden_field_tag 'header-vals[]', ghp.value %>
-        </div>
-      <% end %>
-    </div>
-    
     <% if @endpoint.parameter_sets.empty? %>
-    <p>
-      <strong><%= label_tag 'Parameter Set:' %></strong>
-      <%= link_to "New", new_endpoint_parameter_set_path(@endpoint) %>
-    </p>
-    <% else %>
-    <div id="parameter-set-selection">
       <p>
         <strong><%= label_tag 'Parameter Set:' %></strong>
-        <%= select_tag 'parameter_set_id', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
+        <%= link_to "New", new_endpoint_parameter_set_path(@endpoint) %>
       </p>
-    </div>
+    <% else %>
+      <div id="parameter-set-selection">
+        <p>
+          <strong><%= label_tag 'Parameter Set:' %></strong>
+          <%= select_tag 'parameter_set_id', options_from_collection_for_select(@endpoint.parameter_sets, 'id', 'name', 1) %>
+        </p>
+      </div>
+      
+      <%= link_to "View Global Parameters", nil, :id => "toggle-globals-link" %>
+      <div id="global-parameters" style="display: none;">
+        <%= render :partial => "global_parameters", :locals => { :gps => @global_standard_params } unless @global_standard_params.empty? %>
+        <%= render :partial => "global_parameters", :locals => { :gps => @global_header_params } unless @global_header_params.empty? %>
+        <%= render :partial => "global_parameters", :locals => { :gps => @global_url_params } unless @global_url_params.empty? %>
+      </div>
     
-    <div id="parameter-set">
-      <%= render :partial => "parameter_set", :collection => [@endpoint.parameter_sets.first], :as => :ps %>
-    </div>
+      <div id="parameter-set">
+        <%= render :partial => "parameter_set", :collection => [@endpoint.parameter_sets.first], :as => :ps %>
+      </div>
     <% end %>
     
     <p><%= link_to "Response Explanation", nil, :id => "response-members-link" %></p>

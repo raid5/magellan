@@ -12,6 +12,7 @@ class EndpointsController < ApplicationController
     @auth_default = Authentication.find_by_auth_default(true)
     @global_standard_params = GlobalParameter.where(:p_type => Parameter::TYPES[:parameter])
     @global_header_params = GlobalParameter.where(:p_type => Parameter::TYPES[:header])
+    @global_url_params = GlobalParameter.where(:p_type => Parameter::TYPES[:url])
   end
 
   def new
@@ -80,7 +81,7 @@ class EndpointsController < ApplicationController
       end
 
       # update auth
-      add_auth(auth, curl, params)
+      add_basic_auth(curl, authentication.username, authentication.password)
 
       # arbitrary headers
       add_headers_from_arrays(curl, params["header-keys"], params["header-vals"])
@@ -184,13 +185,10 @@ class EndpointsController < ApplicationController
     p.chop
   end
   
-  # update auth based on auth type
-  def add_auth(auth, curl, params)
-    if auth == 'basic'
-      username, password = params.values_at(:username, :password)
-      encoded = Base64.encode64("#{username}:#{password}").gsub("\n",'')
-      curl.headers['Authorization'] = "Basic #{encoded}"
-    end
+  # update auth
+  def add_basic_auth(curl, username, password)
+    encoded = Base64.encode64("#{username}:#{password}").gsub("\n",'')
+    curl.headers['Authorization'] = "Basic #{encoded}"
   end
   
   # url parameters from non-empty keys and values

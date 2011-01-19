@@ -14,7 +14,8 @@
   <div class="field">
     <%= f.label :p_type, "Parameter Type" %><br />
     <%= f.radio_button :p_type, Parameter::TYPES[:parameter] %> Standard<br />
-    <%= f.radio_button :p_type, Parameter::TYPES[:header] %> Header
+    <%= f.radio_button :p_type, Parameter::TYPES[:header] %> Header<br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:url] %> URL
   </div>
 
   <div class="actions">

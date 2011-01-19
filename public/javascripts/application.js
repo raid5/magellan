@@ -42,6 +42,12 @@ $(document).ready(function(){
       $('#authentication-oauth').show();
     }
   });
+  
+  // toggle global parameters display
+  $("#toggle-globals-link").live('click', function(e) {
+    $("#global-parameters").toggle();
+    return false;
+  });
 
   // toggle parameter description
   $("div#parameter-set a.description-toggle").live('click', function(e) {
