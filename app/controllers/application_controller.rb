@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # 
   # def authenticate
   #   authenticate_or_request_with_http_basic do |username, password|
-  #     username == 'raid5' && password == '73raidferdmag'
+  #     username == 'admin' && password == 'password'
   #   end unless controller_name == 'endpoints' && action_name == 'show'
   # end
 end
