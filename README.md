@@ -1,7 +1,7 @@
 Magellan - The API Explorer
 ===========================
 
-Explore those APIs with the famous Magellan.
+Explore those APIs with the famous Ferdinand Magellan.
 
 Requirements
 ------------
