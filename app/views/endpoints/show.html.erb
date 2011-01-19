@@ -9,7 +9,9 @@
   
   <h1><%= @endpoint.name %></h1>
 
-  <p><%= @endpoint.description %></p>
+  <div id="endpoint-desc">
+    <p><%= @endpoint.description %></p>
+  </div>
   
   <% unless @endpoint.notes.blank? %>
   <p>Notes: <%= @endpoint.notes %></p>

@@ -68,6 +68,10 @@ div.field, div.actions {
   border: 2px dashed lightgray;
 }
 
+#endpoint-desc {
+  width: 500px;
+}
+
 #explorer-response-explanation table {
   margin-bottom: 20px;
 }
