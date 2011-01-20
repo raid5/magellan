@@ -9,9 +9,11 @@
   <h2>Parameters</h2>
   
   <p>
-    Standard parameters are normal name/value pairs used in the query string or
-    post data sent with the request. In contrast, header parameters are name/value 
-    pairs added to the request headers.
+    Standard parameters are normal name/value pairs used in the query string of
+    the request. Header parameters are name/value 
+    pairs added to the request headers. Finally, url parameters are those used to
+    replace url placeholders specified in the endpoint url (such as GET /users/:username.json).
+    In this case, 'username' is the parameter name.
   </p>
 
   <%= link_to "New Parameter", new_parameter_set_parameter_path(@parameter_set) %>
@@ -82,8 +84,7 @@
   <h2>Done?</h2>
 
   <p>
-    After you have completed setting up any standard parameters, header parameters,
-    and response members, you can:
+    After you have completed setting up any and response members, you can:
     <ul>
       <li><%= link_to "Test", endpoint_path(@parameter_set.endpoint) %> the parameter set</li>
       <li><%= link_to "Create", new_endpoint_parameter_set_path(@parameter_set.endpoint) %> an additional parameter set</li>

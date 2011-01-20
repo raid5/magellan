@@ -11,6 +11,12 @@
   </div>
   <div class="field">
     <%= f.label :url %><br />
+    <span class="field-tip">
+      Prefix any URL parameters with a colon.<br />
+      Example: http://api.example.com/users/:id.:format<br />
+      Both 'id' and 'format' would be URL parameters in this case.
+    </span>
+    <br />
     <%= f.text_field :url %>
   </div>
 

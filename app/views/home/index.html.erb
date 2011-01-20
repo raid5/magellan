@@ -2,18 +2,18 @@
 
 <div class="page_container">
   
-  <p>Magellan is a simple, standalone API explorer written in Rails 3.</p>
+  <p>Magellan is a standalone API explorer written in Rails 3.</p>
 
   <p>
     <h2>(1) Authentication</h2>
     To get things started, you need to setup the authentication schemes you plan
-    on using to access the API. Only HTTP Basic is currently supported, with
-    OAuth coming very soon. If you are unfamiliar with HTTP Basic, see
-    <%= link_to "Basic access authentication", 'http://en.wikipedia.org/wiki/Basic_access_authentication' %>.
+    on using to access the API. HTTP Basic and OAuth 1.0a are currently supported.
+    If you are unfamiliar with HTTP Basic, see <%= link_to "Basic access authentication", 'http://en.wikipedia.org/wiki/Basic_access_authentication' %>.
+    The same goes for OAuth, see <%= link_to "OAuth 1.0 Protocol", 'http://tools.ietf.org/html/rfc5849' %>.
     You can add as many authentications as you wish, and set your default authentication
-    scheme to use. In addition, you will be able to toggle between your difference
-    authentications when exploring the API. You must define at least one authentication before
-    continuing on.
+    scheme to use. In addition, you will be able to toggle between your different
+    authentications when exploring the API. You <strong>must</strong> define at
+    least one default authentication before continuing on.
   </p>
 
   <p><%= link_to "Authentication Setup", authentications_path %></p>
@@ -35,7 +35,9 @@
       up any global parameters that you plan on including with all API requests. An
       example of this is an API key provided by the service you are trying to access.
       Many services require you send your API key along with every request to track
-      your usage and watch for abuse.
+      your usage and watch for abuse. Another common use is to specify the response
+      format with endpoint urls such as GET /users.format, where 'format' is either
+      'json' or 'xml'.
     </p>
 
     <p><%= link_to "Global Parameters Setup", global_parameters_path %></p>
@@ -52,7 +54,7 @@
       <h2>(3) Groups &amp; Endpoints</h2>
       After you have setup your authentications and defined any global parameters
       you would like to use, it is time to move onto creating groups to categorize
-      your endpoints by. This is just an approach to organize endpoints in a
+      your endpoints. This is an approach to organize endpoints in a
       reasonable fashion. If you don't really care to group your endpoints, just
       create a single top-level group and add your endpoints to it.
     </p>

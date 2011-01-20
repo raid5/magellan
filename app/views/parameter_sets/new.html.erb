@@ -1,6 +1,14 @@
 <div class="page_container">
   
   <h1><%= @endpoint.name %> - New Parameter Set</h1>
+  
+  <p>
+    Parameters sets are a way to send different groupings of parameters (names/values)
+    to the same Endpoint URL. In addition, you can specify different HTTP actions
+    (GET, POST, PUT, DELETE) for individual parameter sets. The majority of the
+    time a single parameter set is only needed. In that case, you can just name
+    the parameter set the same as the endpoint.
+  </p>
 
   <%= render 'form' %>
 
