@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
   # def authenticate
   #   authenticate_or_request_with_http_basic do |username, password|
   #     username == ENV['MAG_USERNAME'] && password == ENV['MAG_PASSWORD']
-  #   end unless controller_name == 'endpoints' && action_name == 'show'
+  #   end unless controller_name == 'endpoints' && (action_name == 'show' || action_name == 'explore')
   # end
 end
