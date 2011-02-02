@@ -48,6 +48,7 @@ Requirements
 * curb
 * yajl-ruby
 * xmllint
+* simplejson
 * pygments
 
 Tested On
@@ -77,9 +78,10 @@ Install xmllint (used to format the XML output)
     Ubuntu/Debian
     $ apt-get install libxml2-utils
     
-Python egg for pygments (used by the Albino gem)
+Python eggs for pygments (used by the Albino gem) and simplejson (formatting)
 
-    $ easy_install pygments
+    $ easy_install pygments simplejson
+
     
 Getting Going
 -------------
