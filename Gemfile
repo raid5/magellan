@@ -5,7 +5,7 @@ gem 'rails', '3.0.3'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'curb'
 gem 'yajl-ruby'
-gem 'albino'
+gem 'albino', :git => 'git://github.com/raid5/albino.git'
 
 gem 'oauth'
 gem 'typhoeus'

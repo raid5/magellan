@@ -1,3 +1,4 @@
+require 'tidy'
 require 'oauth/request_proxy/typhoeus_request'
 
 class EndpointsController < ApplicationController
@@ -302,19 +303,14 @@ class EndpointsController < ApplicationController
   end
 
   def pretty_print_json(content)
-    # (Old. Removed simplejson) colorize :js => shell("python -msimplejson.tool", :stdin => content)
-    
-    jason = Yajl::Parser.parse(content)
-    #colorize :js => Yajl::Encoder.encode(jason, :pretty => true)
-    Yajl::Encoder.encode(jason, :pretty => true)
+    colorize :js => shell("python -msimplejson.tool", :stdin => content)
   end
 
   def pretty_print_xml(content)
     temp = Tempfile.new(['xmlcontent', '.xml'])
     temp.print content
     temp.flush
-    # colorize :xml => shell("xmllint --format #{temp.path}")
-    shell("xmllint --format #{temp.path}")
+    colorize :xml => shell("xmllint --format #{temp.path}")
   ensure
     temp.close!
   end
