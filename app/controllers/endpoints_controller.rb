@@ -1,4 +1,3 @@
-require 'tidy'
 require 'oauth/request_proxy/typhoeus_request'
 
 class EndpointsController < ApplicationController
