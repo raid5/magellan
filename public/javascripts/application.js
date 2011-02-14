@@ -137,7 +137,7 @@ $(document).ready(function(){
   // endpoints - change parameter set
   $('select[name=parameter_set]').children().first().attr("selected", "selected");
   
-  $('select[name=parameter_set]').change(function() {
+  $('select[name=parameter_set_id]').change(function() {
     // Update http method for parameter set
     $('#parameter-set-http-method').html(
       $('#parameter_set_'+$(this).val()).children('input').val()
