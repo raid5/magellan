@@ -37,7 +37,7 @@ preconfigured to hit a few Twitter API endpoints (including updating the status
 of my test user @ferd_magellan). The link below is the explore interface only.
 Every other page is protected to prevent tampering with the demo setup.
 
-[Heroku Instance](http://ferdinand-magellan.heroku.com/)
+[Amazon EC2 Instance](http://50.18.54.241:3000/)
 
 Requirements
 ------------
