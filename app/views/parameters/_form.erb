@@ -15,7 +15,7 @@
   </div>
   <div class="field">
     <%= f.label :p_type, "Parameter Type" %><br />
-    <%= f.radio_button :p_type, Parameter::TYPES[:parameter] %> Standard<br />
+    <%= f.radio_button :p_type, Parameter::TYPES[:parameter], @parameter.new_record? ? {:checked => true} : {} %> Standard<br />
     <%= f.radio_button :p_type, Parameter::TYPES[:header] %> Header<br />
     <%= f.radio_button :p_type, Parameter::TYPES[:url] %> URL
   </div>
