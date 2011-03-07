@@ -39,8 +39,7 @@ class ParameterSetsController < ApplicationController
   
   def destroy
     @parameter_set = ParameterSet.find(params[:id])
-    endpoint = @parameter_set.endpoint
     @parameter_set.destroy
-    redirect_to endpoint
+    redirect_to groups_path
   end
 end
