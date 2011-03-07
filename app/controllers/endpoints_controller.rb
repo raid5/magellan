@@ -50,7 +50,7 @@ class EndpointsController < ApplicationController
   def destroy
     @endpoint = Endpoint.find(params[:id])
     @endpoint.destroy
-    redirect_to endpoints_path
+    redirect_to groups_path
   end
   
   # The following code is based on the hurl.it project (http://github.com/defunkt/hurl)
