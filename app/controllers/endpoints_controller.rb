@@ -25,7 +25,6 @@ class EndpointsController < ApplicationController
     @endpoint = @group.endpoints.build(params[:endpoint])
     
     if @endpoint.save
-      #redirect_to @endpoint, :notice => "Endpoint created"
       redirect_to new_endpoint_parameter_set_path(@endpoint), :notice => "Endpoint created"
     else
       render :action => :new
@@ -40,7 +39,6 @@ class EndpointsController < ApplicationController
     @endpoint = Endpoint.find(params[:id])
     
     if @endpoint.update_attributes(params[:endpoint])
-      #redirect_to @endpoint, :notice => "Endpoint updated"
       redirect_to groups_path, :notice => "Endpoint updated"
     else
       render :action => :edit
@@ -90,7 +88,12 @@ class EndpointsController < ApplicationController
       fields = make_fields(method, params["param-keys"], params["param-vals"])
 
       begin
-        curl.send("http_#{method.downcase}", *fields)
+        if method == 'PUT'
+          put_data = to_params(Array(params["param-keys"]), Array(params["param-vals"]))
+          curl.send("http_put", put_data)
+        else
+          curl.send("http_#{method.downcase}", *fields)
+        end
 
         header  = pretty_print_headers(curl.header_str)
         body    = pretty_print(curl.content_type, curl.body_str)
@@ -167,7 +170,7 @@ class EndpointsController < ApplicationController
   
   # build curl client based on http method
   def curl_client(url, method, params)
-    if method == 'GET' && !Array(params["param-keys"]).empty?
+    if (method == 'GET' || method == 'DELETE') && !Array(params["param-keys"]).empty?
       params = to_params(Array(params["param-keys"]), Array(params["param-vals"]))
       Curl::Easy.new("#{url}?#{params}")
     else
@@ -226,7 +229,7 @@ class EndpointsController < ApplicationController
 
   # post params from non-empty keys and values
   def make_fields(method, keys, values)
-    return [] unless method == 'POST'
+    return [] if (method == 'GET' || method == 'DELETE')
 
     fields = []
     keys, values = Array(keys), Array(values)
